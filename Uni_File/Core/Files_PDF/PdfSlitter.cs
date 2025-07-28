@@ -9,7 +9,7 @@ namespace Uni_File.Core.Files_PDF
         public void Slitter(string pathInput, string pathOutput, bool isCheckAllKeyWords, 
             bool isCheckRegister, params string[] keyWords)
         {
-            IFilter filter = new FilterPdf();
+            IFilter filter = ConditionChecker.IsPdfScanned(pathInput);
             List<int> pageCoins = filter.Filter(isCheckAllKeyWords, isCheckRegister, pathInput, keyWords);
 
             using (PdfDocument pdfDoc = new PdfDocument(new PdfReader(pathInput)))
