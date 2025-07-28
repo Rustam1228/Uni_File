@@ -3,9 +3,9 @@ using Uni_File.Core.Abstracts.IConverter;
 using Uni_File.Core.Abstracts.IFilter;
 using Uni_File.Core.Abstracts.IReader;
 
-namespace Uni_File.Core.Files_PDF
+namespace Uni_File.Core.Files_PDF.Filter
 {
-    internal class FilterPdf : IFilter
+    public class FilterPdfScanned : IFilter
     {
         public List <int> Filter(bool isCheckAllKeyWords, bool isCheckRegister, 
             string path, params string[] keyWords)
@@ -24,7 +24,7 @@ namespace Uni_File.Core.Files_PDF
                         using (var pix = convertBitmapToPix.Convert(clonedImage))
                         {
                             string pageText = imageReader.ReadText(pix);
-                            if (IChecksPageCoin(isCheckAllKeyWords, isCheckRegister, pageText, keyWords))
+                            if (ConditionChecker.IsFilterCriteriaMet(isCheckAllKeyWords, isCheckRegister, pageText, keyWords))
                             {
                                 Results.Add(i + 1);
                             }
@@ -35,24 +35,7 @@ namespace Uni_File.Core.Files_PDF
                 }
             }
             return Results;
-        }      
-        
-        private bool IChecksPageCoin(bool isCheckAllKeyWords, bool isCheckRegister, string textFile, params string[] keyWords)
-        {
-            if (isCheckAllKeyWords && isCheckRegister)
-            {
-                return keyWords.All(word => textFile.IndexOf(word, StringComparison.OrdinalIgnoreCase) >= 0);
-            }
-            if (isCheckAllKeyWords && !isCheckRegister)
-            {
-                return keyWords.All(word => textFile.Contains(word));
-            }
-            if (!isCheckAllKeyWords && isCheckRegister)
-            {
-                return keyWords.Any(word => textFile.IndexOf(word, StringComparison.OrdinalIgnoreCase) >= 0);
-            }
-            return keyWords.Any(word => textFile.Contains(word));
-        }
+        }     
         
     }
 }
