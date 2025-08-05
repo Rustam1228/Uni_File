@@ -43,6 +43,9 @@
             TextKeyWords = new Label();
             TextPathFile = new Label();
             ButtonDeliteKeyWord = new Button();
+            buttonWriteText = new Button();
+            LebelNewName = new Label();
+            textBoxNewNameFile = new TextBox();
             SuspendLayout();
             // 
             // ButtonExtractor
@@ -57,7 +60,7 @@
             // 
             // ButtonSlitter
             // 
-            ButtonSlitter.Location = new Point(310, 359);
+            ButtonSlitter.Location = new Point(414, 359);
             ButtonSlitter.Name = "ButtonSlitter";
             ButtonSlitter.Size = new Size(180, 43);
             ButtonSlitter.TabIndex = 1;
@@ -77,14 +80,14 @@
             // 
             // textBoxFile
             // 
-            textBoxFile.Location = new Point(30, 52);
+            textBoxFile.Location = new Point(30, 41);
             textBoxFile.Name = "textBoxFile";
             textBoxFile.Size = new Size(564, 27);
             textBoxFile.TabIndex = 3;
             // 
             // textBoxFolder
             // 
-            textBoxFolder.Location = new Point(30, 131);
+            textBoxFolder.Location = new Point(30, 111);
             textBoxFolder.Name = "textBoxFolder";
             textBoxFolder.Size = new Size(564, 27);
             textBoxFolder.TabIndex = 4;
@@ -92,16 +95,15 @@
             // ListBoxKeyWord
             // 
             ListBoxKeyWord.FormattingEnabled = true;
-            ListBoxKeyWord.Location = new Point(30, 215);
+            ListBoxKeyWord.Location = new Point(30, 183);
             ListBoxKeyWord.Name = "ListBoxKeyWord";
             ListBoxKeyWord.RightToLeft = RightToLeft.No;
             ListBoxKeyWord.Size = new Size(274, 84);
             ListBoxKeyWord.TabIndex = 6;
-          
             // 
             // ButtonTextPath
             // 
-            ButtonTextPath.Location = new Point(641, 52);
+            ButtonTextPath.Location = new Point(632, 41);
             ButtonTextPath.Name = "ButtonTextPath";
             ButtonTextPath.Size = new Size(147, 32);
             ButtonTextPath.TabIndex = 7;
@@ -111,7 +113,7 @@
             // 
             // ButtonTextNewFolder
             // 
-            ButtonTextNewFolder.Location = new Point(641, 129);
+            ButtonTextNewFolder.Location = new Point(641, 109);
             ButtonTextNewFolder.Name = "ButtonTextNewFolder";
             ButtonTextNewFolder.Size = new Size(147, 29);
             ButtonTextNewFolder.TabIndex = 8;
@@ -122,7 +124,7 @@
             // CheckBoxAllKeyWord
             // 
             CheckBoxAllKeyWord.AutoSize = true;
-            CheckBoxAllKeyWord.Location = new Point(310, 232);
+            CheckBoxAllKeyWord.Location = new Point(310, 183);
             CheckBoxAllKeyWord.Name = "CheckBoxAllKeyWord";
             CheckBoxAllKeyWord.Size = new Size(264, 24);
             CheckBoxAllKeyWord.TabIndex = 9;
@@ -133,7 +135,7 @@
             // CheckBoxIndexOf
             // 
             CheckBoxIndexOf.AutoSize = true;
-            CheckBoxIndexOf.Location = new Point(310, 282);
+            CheckBoxIndexOf.Location = new Point(310, 243);
             CheckBoxIndexOf.Name = "CheckBoxIndexOf";
             CheckBoxIndexOf.Size = new Size(211, 24);
             CheckBoxIndexOf.TabIndex = 10;
@@ -143,7 +145,7 @@
             // 
             // ButtonAddKeyWord
             // 
-            ButtonAddKeyWord.Location = new Point(641, 215);
+            ButtonAddKeyWord.Location = new Point(641, 183);
             ButtonAddKeyWord.Name = "ButtonAddKeyWord";
             ButtonAddKeyWord.Size = new Size(147, 29);
             ButtonAddKeyWord.TabIndex = 11;
@@ -154,7 +156,7 @@
             // TextNewFolder
             // 
             TextNewFolder.AutoSize = true;
-            TextNewFolder.Location = new Point(30, 97);
+            TextNewFolder.Location = new Point(30, 86);
             TextNewFolder.Name = "TextNewFolder";
             TextNewFolder.Size = new Size(332, 20);
             TextNewFolder.TabIndex = 12;
@@ -164,7 +166,7 @@
             // TextKeyWords
             // 
             TextKeyWords.AutoSize = true;
-            TextKeyWords.Location = new Point(30, 173);
+            TextKeyWords.Location = new Point(30, 151);
             TextKeyWords.Name = "TextKeyWords";
             TextKeyWords.Size = new Size(307, 20);
             TextKeyWords.TabIndex = 13;
@@ -183,7 +185,7 @@
             // 
             // ButtonDeliteKeyWord
             // 
-            ButtonDeliteKeyWord.Location = new Point(641, 277);
+            ButtonDeliteKeyWord.Location = new Point(641, 240);
             ButtonDeliteKeyWord.Name = "ButtonDeliteKeyWord";
             ButtonDeliteKeyWord.Size = new Size(147, 29);
             ButtonDeliteKeyWord.TabIndex = 15;
@@ -191,11 +193,41 @@
             ButtonDeliteKeyWord.UseVisualStyleBackColor = true;
             ButtonDeliteKeyWord.Click += ButtonDeliteKeyWordClick;
             // 
+            // buttonWriteText
+            // 
+            buttonWriteText.Location = new Point(236, 359);
+            buttonWriteText.Name = "buttonWriteText";
+            buttonWriteText.Size = new Size(156, 43);
+            buttonWriteText.TabIndex = 16;
+            buttonWriteText.Text = "Записать ";
+            buttonWriteText.UseVisualStyleBackColor = true;
+            buttonWriteText.Click += ButtonWrite;
+            // 
+            // LebelNewName
+            // 
+            LebelNewName.AutoSize = true;
+            LebelNewName.Location = new Point(30, 282);
+            LebelNewName.Name = "LebelNewName";
+            LebelNewName.Size = new Size(150, 20);
+            LebelNewName.TabIndex = 17;
+            LebelNewName.Text = "Укажите имя файла ";
+            LebelNewName.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // textBoxNewNameFile
+            // 
+            textBoxNewNameFile.Location = new Point(30, 305);
+            textBoxNewNameFile.Name = "textBoxNewNameFile";
+            textBoxNewNameFile.Size = new Size(470, 27);
+            textBoxNewNameFile.TabIndex = 18;
+            // 
             // FormUniFile
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(textBoxNewNameFile);
+            Controls.Add(LebelNewName);
+            Controls.Add(buttonWriteText);
             Controls.Add(ButtonDeliteKeyWord);
             Controls.Add(TextPathFile);
             Controls.Add(TextKeyWords);
@@ -233,5 +265,8 @@
         private Label TextKeyWords;
         private Label TextPathFile;
         private Button ButtonDeliteKeyWord;
+        private Button buttonWriteText;
+        private Label LebelNewName;
+        private TextBox textBoxNewNameFile;
     }
 }

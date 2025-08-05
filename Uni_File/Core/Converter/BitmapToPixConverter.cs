@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using Tesseract;
+﻿using Tesseract;
 using Uni_File.Core.Abstracts.IConverter;
 
-namespace Uni_File.Core.Files_PDF
+namespace Uni_File.Core.Converter
 {
     internal class BitmapToPixConverter : IBitmapToPixConverter
     {

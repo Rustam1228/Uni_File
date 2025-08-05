@@ -9,10 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Core\Files_Txt\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="DocX" Version="4.0.25105.5786" />
     <PackageReference Include="itext.bouncy-castle-adapter" Version="9.2.0" />
     <PackageReference Include="itext7" Version="9.2.0" />
     <PackageReference Include="PdfiumViewer" Version="2.13.0" />

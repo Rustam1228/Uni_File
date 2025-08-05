@@ -1,7 +1,10 @@
 using Microsoft.VisualBasic;
 using Uni_File.Core.Abstracts.IExtractor;
 using Uni_File.Core.Abstracts.ISlitter;
-using Uni_File.Core.Files_PDF;
+using Uni_File.Core.Abstracts.IWrite;
+using Uni_File.Core.Extractor;
+using Uni_File.Core.Sliter;
+using Uni_File.Core.Write;
 
 namespace Uni_File
 {
@@ -17,7 +20,7 @@ namespace Uni_File
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.Filter = "PDF files (*.pdf)|*.pdf|Text files (*.txt)|*.txt";
+                // openFileDialog.Filter = "Docx files(*.docx)|*.docx|PDF files (*.pdf)|*.pdf|Text files (*.txt)|*.txt";
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     textBoxFile.Text = openFileDialog.FileName;
@@ -112,7 +115,7 @@ namespace Uni_File
         // удаляет ключевые слова 
         private void ButtonDeliteKeyWordClick(object sender, EventArgs e)
         {
-            if(ListBoxKeyWord.SelectedItem == null)
+            if (ListBoxKeyWord.SelectedItem == null)
             {
                 MessageBox.Show("Выберите слова для удаление");
                 return;
@@ -130,7 +133,7 @@ namespace Uni_File
             }
 
         }
-        
+
         private void CheckBoxAllKeyWord_CheckedChanged(object sender, EventArgs e)
         {
             if (CheckBoxAllKeyWord.Text == "Хотя бы одно слово на страницы")
@@ -153,6 +156,28 @@ namespace Uni_File
             {
                 CheckBoxIndexOf.Text = "Не игнорировать регистр";
             }
+        }
+
+        private void ButtonWrite(object sender, EventArgs e)
+        {
+            if (!File.Exists(textBoxFile.Text))
+            {
+                MessageBox.Show("Не существует файла по данному пути ");
+                return;
+            }
+            if (!Directory.Exists(textBoxFolder.Text))
+            {
+                MessageBox.Show("Не существует папки для сохранения по данному пути ");
+                return;
+            }
+            if (string.IsNullOrEmpty(textBoxNewNameFile.Text))
+            {
+                MessageBox.Show("Укажите имя");
+                return;
+            }
+            IWrite write= new WriteTxt();
+            string result = write.WriteText(textBoxFile.Text, textBoxFolder.Text, textBoxNewNameFile.Text);
+            MessageBox.Show(result);
         }
 
         

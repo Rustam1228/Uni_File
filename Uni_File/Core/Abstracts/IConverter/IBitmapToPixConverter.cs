@@ -1,5 +1,4 @@
-﻿
-using Tesseract;
+﻿using Tesseract;
 
 namespace Uni_File.Core.Abstracts.IConverter
 {
