@@ -1,14 +1,10 @@
-﻿using PdfiumViewer;
-using System.Drawing;
-using System.Text;
-using Tesseract;
-using Uni_File.Core.Abstracts.IReader;
-
-namespace Uni_File.Core.Files_PDF
+﻿using Tesseract;
+using Uni_File.Core.Abstracts.IConverter;
+namespace Uni_File.Core.Converter
 {
-    public class ImageTextReader : IImageTextReader
+    public class PixToTextConverter : IPixToTextConverter
     {
-        public string ReadText(Pix image)
+        public string Convert(Pix inputFile)
         {
             string tessDataPath = Path.Combine(Directory.GetCurrentDirectory(), "tessdata");
 
@@ -19,11 +15,12 @@ namespace Uni_File.Core.Files_PDF
 
             using (var engine = new TesseractEngine(tessDataPath, "rus", EngineMode.Default))
             {
-                using (var page = engine.Process(image))
+                using (var page = engine.Process(inputFile))
                 {
                     return page.GetText();
-                }                
+                }
             }
         }
+       
     }
 }

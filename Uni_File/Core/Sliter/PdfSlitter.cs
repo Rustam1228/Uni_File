@@ -1,16 +1,15 @@
 ﻿using iText.Kernel.Pdf;
-using Uni_File.Core.Abstracts.IFilter;
 using Uni_File.Core.Abstracts.ISlitter;
+using Uni_File.Core.Helpers;
 
-namespace Uni_File.Core.Files_PDF
+namespace Uni_File.Core.Sliter
 {
     internal class PdfSlitter : ISlitter
     {
         public void Slitter(string pathInput, string pathOutput, bool isCheckAllKeyWords, 
             bool isCheckRegister, params string[] keyWords)
         {
-            IFilter filter = ConditionChecker.IsPdfScanned(pathInput);
-            List<int> pageCoins = filter.Filter(isCheckAllKeyWords, isCheckRegister, pathInput, keyWords);
+            List<int> pageCoins = ConditionChecker.Filter(isCheckAllKeyWords, isCheckRegister, pathInput, keyWords);
 
             using (PdfDocument pdfDoc = new PdfDocument(new PdfReader(pathInput)))
             {
@@ -19,8 +18,8 @@ namespace Uni_File.Core.Files_PDF
                 {
                     if(pdfDocCoins >= pageCoins[i])
                     {
-                        string newPathName = Guid.NewGuid().ToString();
-                        string outputPdfPath = Path.Combine(pathOutput, $"Копия_{i + 1}_{newPathName}.pdf");
+                        string newName = Guid.NewGuid().ToString();
+                        string outputPdfPath = Path.Combine(pathOutput, $"Копия_{i + 1}_{newName}.pdf");
                         if (i == 0 && pageCoins[i] == 1)
                         {
                             using (PdfDocument newPdfDoc = new PdfDocument(new PdfWriter(outputPdfPath)))
@@ -34,7 +33,7 @@ namespace Uni_File.Core.Files_PDF
                             {
                                 pdfDoc.CopyPagesTo(1, pageCoins[i]-1, newPdfDoc);
                             }
-                            string outputPdfPath1 = Path.Combine(pathOutput, $"Копия_0{i + 1}{newPathName}.pdf");
+                            string outputPdfPath1 = Path.Combine(pathOutput, $"Копия_0{i + 1}{newName}.pdf");
                             using (PdfDocument newPdfDoc = new PdfDocument(new PdfWriter(outputPdfPath1)))
                             {
                                 pdfDoc.CopyPagesTo(pageCoins[i], pageCoins[i + 1] - 1, newPdfDoc);
